@@ -1,0 +1,35 @@
+.interval-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  &__control {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: relative;
+  }
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+  }
+  &__error {
+    color: #d55858;
+    position: absolute;
+    top: 72px;
+    left: 0px;
+    font-size: 12px;
+  }
+  &__color-error {
+    color: #d55858;
+    position: absolute;
+    top: 166px;
+    left: 0px;
+    font-size: 12px;
+  }
+}

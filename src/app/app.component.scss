@@ -1,0 +1,28 @@
+.main {
+  padding: 24px;
+  background-color: #3d3b3b;
+  height: 100vh;
+  &__top-container {
+    padding: 12px 0;
+    display: flex;
+    gap: 150px;
+    color: white;
+  }
+  &__color-wrap {
+    height: 50px;
+    width: 100px;
+    transition: background-color 0.5 easy;
+  }
+  &__btn-wrap {
+    margin-left: auto;
+  }
+  &__timer-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 500;
+    padding: 22px;
+    border: 1px solid white;
+  }
+}

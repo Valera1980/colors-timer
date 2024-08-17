@@ -1,0 +1,55 @@
+<div class="interval-form" [formGroup]="form">
+  <div class="interval-form__body">
+    <div class="interval-form__control">
+      <label for="idFrom">Form seconds</label>
+      <p-inputNumber
+        inputId="idFrom"
+        [useGrouping]="false"
+        formControlName="from"
+        aria-describedby="from-help"
+      />
+      @if (fromControl.invalid && fromControl.dirty) {
+      <small class="interval-form__error" id="from-help">
+        {{ getFromControlErrors() }}
+      </small>
+      }
+    </div>
+    <div class="interval-form__control">
+      <label for="idTo">To Seconds</label>
+      <p-inputNumber
+        inputId="idTo"
+        [useGrouping]="false"
+        formControlName="to"
+        aria-describedby="to-help"
+      />
+      @if (toControl.invalid && toControl.dirty) {
+      <small class="interval-form__error" id="to-help">
+        {{ getToControlErrors() }}
+      </small>
+      }
+    </div>
+    <div class="interval-form__control">
+      <p-colorPicker formControlName="color" [inline]="true" />
+      @if(colorControl.invalid && toControl.dirty){
+      <small class="interval-form__color-error">
+        {{ getColorControlErrors() }}</small
+      >
+      }
+    </div>
+  </div>
+
+  <div class="interval-form__footer">
+    <p-button
+      label="Save"
+      size="small"
+      (onClick)="onSave()"
+      [disabled]="form.untouched || form.invalid"
+    />
+    <p-button
+      label="Cancel"
+      severity="secondary"
+      size="small"
+      (onClick)="onCancel()"
+    />
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="main">
+  <div class="main__top-container">
+    <h2>TIMER</h2>
+    <div class="main__timer-wrap">{{ this.seconds$ | async }}</div>
+    <div
+      class="main__color-wrap"
+      [ngStyle]="{ backgroundColor: (currentColor$ | async) }"
+    ></div>
+    <div class="main__btn-wrap">
+      <p-button
+        icon="pi pi-plus"
+        label="New"
+        (onClick)="onAdd()"
+        [disabled]="((intervals$ | async)?.length ?? 0) >= 10"
+      />
+    </div>
+  </div>
+  <div class="main__table-wrap">
+    <app-color-table
+      [intervals]="(intervals$ | async) ?? []"
+      (eventDelete)="onDelete($event)"
+    ></app-color-table>
+  </div>
+</div>
+<p-confirmDialog></p-confirmDialog>

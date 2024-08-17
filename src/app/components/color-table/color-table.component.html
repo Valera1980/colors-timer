@@ -1,0 +1,31 @@
+<p-table [value]="intervals" class="table">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>From seconds</th>
+      <th>To seconds</th>
+      <th>Color</th>
+      <th style="width: 30px"></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-interval>
+    <tr>
+      <td>{{ interval.from }}</td>
+      <td>{{ interval.to }}</td>
+      <td>
+        <div
+          class="table__color-wrap"
+          [ngStyle]="{ backgroundColor: interval.color }"
+        ></div>
+      </td>
+      <td>
+        <p-button
+          icon="pi pi-trash"
+          size="small"
+          severity="secondary"
+          [rounded]="true"
+          (onClick)="onDelete(interval.id)"
+        ></p-button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
