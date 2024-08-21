@@ -1,4 +1,10 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ConfirmationService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -24,28 +30,29 @@ import { IntervalService } from './services/interval.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   providers: [DialogService, ConfirmationService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-  readonly #intervalService = inject(IntervalService);
-  readonly #dialogService = inject(DialogService);
-  readonly #dr = inject(DestroyRef);
-  readonly #confirm = inject(ConfirmationService);
+  private intervalService = inject(IntervalService);
+  private dialogService = inject(DialogService);
+  private dr = inject(DestroyRef);
+  private confirm = inject(ConfirmationService);
 
   seconds$!: Observable<number>;
   intervals$!: Observable<Interval[]>;
   currentColor$ = new BehaviorSubject('');
 
-  #timerStop$ = new Subject<void>();
-  #timerStart$ = new Subject<void>();
+  private timerStop$ = new Subject<void>();
+  private timerStart$ = new Subject<void>();
   readonly #maxSeconds = 59;
 
   ngOnInit(): void {
-    this.intervals$ = this.#intervalService.intervals.pipe(shareReplay(1));
+    this.intervals$ = this.intervalService.intervals.pipe(shareReplay(1));
     this.seconds$ = timer(0, 1000).pipe(
       tap((v) => {
         if (v === this.#maxSeconds + 1) {
-          this.#timerStop$.next();
-          this.#timerStart$.next();
+          this.timerStop$.next();
+          this.timerStart$.next();
         }
       }),
       switchMap((second) => {
@@ -57,8 +64,8 @@ export class AppComponent implements OnInit {
         this.currentColor$.next(color);
         return second;
       }),
-      takeUntil(this.#timerStop$),
-      repeat({ delay: () => this.#timerStart$ })
+      takeUntil(this.timerStop$),
+      repeat({ delay: () => this.timerStart$ })
     );
   }
   #pickColor(currentTime: number): Observable<string> {
@@ -72,25 +79,25 @@ export class AppComponent implements OnInit {
     );
   }
   onAdd(): void {
-    const ref = this.#dialogService.open(IntervalFormComponent, {
+    const ref = this.dialogService.open(IntervalFormComponent, {
       header: 'Add new interval',
     });
 
     ref.onClose
       .pipe(
-        takeUntilDestroyed(this.#dr),
+        takeUntilDestroyed(this.dr),
         filter((data) => !!data?.interval)
       )
       .subscribe((data: { interval: Interval }) => {
-        this.#intervalService.addInterval(data.interval!);
+        this.intervalService.addInterval(data.interval!);
       });
   }
 
   onDelete(id: number): void {
-    this.#confirm.confirm({
+    this.confirm.confirm({
       message: 'Are you sure you want to delete the record?',
       header: 'Deleting record',
-      accept: () => this.#intervalService.deleteInterval(id),
+      accept: () => this.intervalService.deleteInterval(id),
     });
   }
 }

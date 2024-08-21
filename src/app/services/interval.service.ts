@@ -40,7 +40,7 @@ export class IntervalService {
     return false;
   }
 
-  isColorExists(color: string): boolean {
+  isColorExists(color: string | null): boolean {
     const item = this.#interval
       .getValue()
       .find((interval) => interval.color === color);

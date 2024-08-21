@@ -1,6 +1,12 @@
 .table {
-  &__color-wrap {
+  &__color-cell {
     height: 30px;
     width: 80px;
+  }
+  &__color-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
   }
 }

@@ -5,4 +5,5 @@ export enum FormErrors {
   rangeOutFrom = 'rangeOutFrom',
   rangeOutTo = 'rangeOutTo',
   wrongInterval = 'wrongInterval',
+  requiredColor = 'requiredColor',
 }

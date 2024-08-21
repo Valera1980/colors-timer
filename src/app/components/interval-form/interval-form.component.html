@@ -30,7 +30,7 @@
     </div>
     <div class="interval-form__control">
       <p-colorPicker formControlName="color" [inline]="true" />
-      @if(colorControl.invalid && toControl.dirty){
+      @if(colorControl.invalid){
       <small class="interval-form__color-error">
         {{ getColorControlErrors() }}</small
       >

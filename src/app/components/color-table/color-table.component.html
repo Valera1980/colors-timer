@@ -12,10 +12,13 @@
       <td>{{ interval.from }}</td>
       <td>{{ interval.to }}</td>
       <td>
-        <div
-          class="table__color-wrap"
-          [ngStyle]="{ backgroundColor: interval.color }"
-        ></div>
+        <div class="table__color-wrap">
+          <div
+            class="table__color-cell"
+            [ngStyle]="{ backgroundColor: interval.color }"
+          ></div>
+          {{ interval.color }}
+        </div>
       </td>
       <td>
         <p-button

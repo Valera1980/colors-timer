@@ -1,7 +1,7 @@
 <div class="main">
   <div class="main__top-container">
     <h2>TIMER</h2>
-    <div class="main__timer-wrap">{{ this.seconds$ | async }}</div>
+    <div class="main__timer-wrap">{{ seconds$ | async }}</div>
     <div
       class="main__color-wrap"
       [ngStyle]="{ backgroundColor: (currentColor$ | async) }"
